@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Bosh sahifa{% endblock title %}
+
+{% block content %}
+
+
+    {% if user.is_authenticated %}
+        <p>Siz tizimga kirgansiz.</p>
+
+        <h1>Assalomu alaykum</h1>
+        <p>Abduvohid Qurbanovning shaxsiy blogiga xush kelibsiz.</p>
+
+    <a href="{% url 'article_list' %}" class="btn btn-primary">Postlarni ko'rish</a>
+
+    {% else %}
+        <h1>Shaxsiy blogimga xush kelibsiz!</h1>
+        <p>Ammo siz hali saytga kirmagansiz.</p>
+    {% endif %}
+{% endblock content %}
+
+

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if object.photo %}
+        <img src="{{ object.photo.url }}" alt="{{ object.title }}">
+    {% endif %}
+
+    <h1>{{ object.title }}</h1>
+    <h6>Muallif: {{ object.author }} | {{ object.date }}</h6>
+    <p>{{ object.body | safe }}</p>
+
+    <a href="{% url 'article_edit' object.pk %}">Tahrirlash</a>
+    <a href="{% url 'article_delete' object.pk %}">O'chirish</a>
+    <a href="{% url 'article_list' %}">Barcha postlar</a>
+
+    <br><br>
+    <h2>Comments...</h2>
+
+    {% if not object.comments.exists %}
+        <p>No Comments Yet... <a href="{% url 'add_comment' object.pk %}">Add One</a></p>
+    {% else %}
+    <a href="{% url 'add_comment' object.pk %}">Add Comment</a><br><br>
+        {% for comment in object.comments.all %}
+            <div style="margin-bottom: 20px;">
+                <strong>{{ comment.name }} - {{ comment.date_added }}</strong><br>
+                <p>{{ comment.body }}</p>
+            </div>
+        {% endfor %}
+<!--             <a href="{% url 'add_comment' object.pk %}">Add Comment</a><br><br>-->
+    {% endif %}
+{% endblock content %}
